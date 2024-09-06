@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css">
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mx-auto px-4 rounded">
+      <div class="h-56 md:h-72 w-full bg-slate-200 relative">
+        <!-- Desktop and tablet version -->
+        <div class="hidden md:flex h-full w-full overflow-hidden">
+          <img src="<%= desktopImages[0] %>" class="w-full h-full" />
+        </div>
+
+        <!-- Mobile version -->
+        <div class="flex h-full w-full overflow-hidden md:hidden">
+          <img src="<%= mobileImages[0] %>" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+
+    <%- include('./partials/script') %>
+  </body>
+</html>

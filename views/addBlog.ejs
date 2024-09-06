@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Add New Report</title>
+    <style>
+        /* Container styling */
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* Form styling */
+        form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form labels and controls */
+        .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 4px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* Spacing */
+        .mb-3 {
+            margin-bottom: 16px;
+        }
+        
+        .mt-10 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-10">
+        <h1 class="text-center mb-4">Add New Disaster Report</h1>
+        <form action="/blog" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="coverImage" class="form-label">Disaster Image</label>
+                <input
+                    type="file"
+                    class="form-control"
+                    id="coverImage"
+                    name="coverImage"
+                    aria-describedby="coverImage"
+                />
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Disaster Place</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="title"
+                    aria-describedby="title"
+                />
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea
+                    class="form-control"
+                    placeholder="Write your blog"
+                    id="body"
+                    name="body"
+                    style="height: 150px"
+                ></textarea>
+            </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-secondary btn-block" onclick="getLocation()">Share Location</button>
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <%- include('./partials/script') %>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    document.getElementById('latitude').value = position.coords.latitude;
+                    document.getElementById('longitude').value = position.coords.longitude;
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+    </script>
+</body>
+</html>
